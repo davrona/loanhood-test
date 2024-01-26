@@ -14,8 +14,10 @@ const getItemById = catchAsync(async (req, res) => {
 });
 
 const getItems = catchAsync(async (req, res) => {
-  const task = await itemService.getItems();
-  res.status(httpStatus.CREATED).send(task);
+  const filter = pick(req.query, []);
+  const options = pick(req.query, ['sortBy', 'limit', 'page']);
+  const result = await itemService.queryItems(filter, options);
+  res.send(result);
 });
 
 const addItem = catchAsync(async (req, res) => {

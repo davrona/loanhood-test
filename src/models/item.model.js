@@ -50,6 +50,7 @@ const itemSchema = mongoose.Schema(
     }
 );
 
+itemSchema.plugin(toJSON);
 itemSchema.plugin(paginate);
 
 /**
